@@ -72,6 +72,33 @@ body {
 .f-result #reset {
   background-color: darkred;
 }
+.f-choose {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  align-content: center;
+  gap: 10px;
+  margin: 10px auto;
+  padding: 0 0 10px;
+  border-bottom: 1px solid #000;
+}
+
+.f-choose label {
+  font-weight: 700;
+}
+
+.f-choose select {
+  padding: 5px 30px;
+  background-color: transparent;
+  color: white;
+  outline: none;
+}
+
+.f-choose select option {
+  background-color: black;
+  outline: none;
+}
 
 .backTop {
   position: fixed;
