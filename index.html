@@ -3,32 +3,29 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Youtube Thumbnail Downloader</title>
+    <title>Document</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div class="container">
-      <div class="proses">
-        <form id="formData" method="get" onsubmit="formsData(event)">
-          <div class="f-group">
-            <label for="url">
-              <input
-                type="text"
-                name="url"
-                id="url"
-                placeholder="https://www.youtube.com/watch?v=xxxxxx"
-              />
-            </label>
-            <button type="submit" class="submit">Get Thumbnail</button>
-            <button type="reset" class="reset">Reset</button>
-          </div>
-        </form>
-      </div>
-      <div class="output">
-        <h2 id="outputTitle">Output</h2>
-      </div>
+      <form id="forms">
+        <div class="f-input">
+          <label for="input">Input URL</label>
+          <input
+            type="text"
+            name="input"
+            id="input"
+            placeholder="https://www.youtube.com/watch?v=XXXXXXX"
+          />
+        </div>
+        <div class="f-result">
+          <button type="submit">Send</button>
+          <button type="reset" id="reset">Reset</button>
+        </div>
+      </form>
     </div>
-    <div class="backToTop">&#8593;</div>
+    <div class="container-image"></div>
+    <div class="backTop">&#8593;</div>
   </body>
-  <script src="main.js"></script>
+  <script src="main.js" type="text/javascript"></script>
 </html>
