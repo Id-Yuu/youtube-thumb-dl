@@ -1,65 +1,70 @@
 const formid = document.getElementById("forms");
 const getInput = document.querySelector("#input");
 const reset = document.querySelector("#reset");
+const chose = document.querySelector("#choose");
 
 formid.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  const inputValue = getInput.value;
+  const input = getInput.value;
 
-  const url = new URL(inputValue);
+  const url = new URL(input);
   const urlSearchParams = new URLSearchParams(url.search);
-  const param = urlSearchParams.get("v");
-  const path = url.pathname.slice(1);
-  const pathShort = path.slice(7);
 
-  if (inputValue === "") {
-    getInput.value = "Oops Wrong URL";
+  let shortPath;
+  let param;
+  let params;
+
+  if (chose.value === "short") {
+    shortPath = url.pathname.slice(8);
   } else {
-    const imageContainer = document.querySelector(".container-image");
+    param = urlSearchParams.get("v");
+    params = url.pathname.slice(1);
+  }
+
+  if (!input) {
+    getInput.value = "Please enter a URL";
+  } else {
+    const container = document.querySelector(".container-image");
 
     const intervalId = setInterval(() => {
       try {
-        const imageUrls = generateImageUrls(param ? param : pathShort);
+        const imageUrls = generateImageUrls(param || shortPath || params);
 
         for (let i = 0; i < imageUrls.length; i++) {
           const image = document.createElement("img");
-          const containerDiv = document.createElement("div");
-          containerDiv.classList.add("image");
+          const imageContainer = document.createElement("div");
+          imageContainer.classList.add("image");
           const imageUrl = imageUrls[i];
           image.src = imageUrl;
-          containerDiv.appendChild(image);
-          imageContainer.appendChild(containerDiv);
+          imageContainer.appendChild(image);
+          container.appendChild(imageContainer);
         }
 
-        imageContainer.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
+        container.scrollIntoView({ behavior: "smooth", block: "start" });
 
         clearInterval(intervalId);
       } catch (error) {
-        console.error("Error generating image URLs:", error);
+        console.error("Error generating image URLs:", error.message);
       }
     }, 1000);
 
     reset.addEventListener("click", () => {
       getInput.value = "";
-      imageContainer.querySelectorAll(".image").forEach((img) => {
+      container.querySelectorAll(".image").forEach((img) => {
         img.remove();
       });
     });
   }
 
-  const backToTopBtn = document.querySelector(".backTop");
+  const backToTopButton = document.querySelector(".backTop");
   const height = document.documentElement.scrollHeight;
-  backToTopBtn.style.display = height > 1000 ? "block" : "none";
+  backToTopButton.style.display = height > 1000 ? "block" : "none";
 
-  backToTopBtn.addEventListener("click", () => {
+  backToTopButton.addEventListener("click", () => {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-    backToTopBtn.style.display = "none";
+    backToTopButton.style.display = "none";
   });
-  // END SUBMIT
 });
 
 function generateImageUrls(value) {
